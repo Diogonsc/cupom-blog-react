@@ -1,18 +1,11 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import {
-  Container,
-  Typography,
-  Box,
-  Button,
-  Paper,
-  Chip,
-  CircularProgress,
-  Alert,
-} from '@mui/material';
-import { ArrowBack, Person, Calendar } from '@mui/icons-material';
 import { fetchPosts } from '../services/api';
+import { Button } from '../components/ui/button';
+import { Badge } from '../components/ui/badge';
+import { Alert, AlertDescription } from '../components/ui/alert';
+import { ArrowLeft, User, Calendar } from 'lucide-react';
 
 interface Post {
   id: number;
@@ -62,142 +55,97 @@ const PostDetail = () => {
 
   if (loading) {
     return (
-      <Container>
-        <Box display="flex" justifyContent="center" py={8}>
-          <CircularProgress size={60} />
-        </Box>
-      </Container>
+      <div className="container mx-auto px-4">
+        <div className="flex justify-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        </div>
+      </div>
     );
   }
 
   if (error || !post) {
     return (
-      <Container>
-        <Alert severity="error" sx={{ mt: 4 }}>
-          {error || 'Post não encontrado'}
+      <div className="container mx-auto px-4">
+        <Alert className="mt-8 border-red-200 bg-red-50">
+          <AlertDescription className="text-red-800">
+            {error || 'Post não encontrado'}
+          </AlertDescription>
         </Alert>
-        <Box mt={2}>
+        <div className="mt-4">
           <Button
-            variant="outlined"
-            startIcon={<ArrowBack />}
+            variant="outline"
             onClick={() => navigate('/posts')}
+            className="flex items-center gap-2"
           >
+            <ArrowLeft className="w-4 h-4" />
             Voltar aos Posts
           </Button>
-        </Box>
-      </Container>
+        </div>
+      </div>
     );
   }
 
   return (
-    <Container maxWidth="md">
-      <Box mb={4}>
+    <div className="container mx-auto px-4 max-w-4xl">
+      <div className="mb-6">
         <Button
-          variant="outlined"
-          startIcon={<ArrowBack />}
+          variant="outline"
           onClick={() => navigate('/posts')}
-          sx={{ mb: 3 }}
+          className="flex items-center gap-2"
         >
+          <ArrowLeft className="w-4 h-4" />
           Voltar aos Posts
         </Button>
-      </Box>
+      </div>
 
-      <Paper elevation={2} sx={{ overflow: 'hidden', borderRadius: 3 }}>
-        <Box
-          component="img"
+      <article className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <img
           src={post.image}
           alt={post.title}
-          sx={{
-            width: '100%',
-            height: { xs: '250px', md: '400px' },
-            objectFit: 'cover',
-          }}
+          className="w-full h-64 md:h-96 object-cover"
         />
         
-        <Box p={{ xs: 3, md: 5 }}>
-          <Box mb={3}>
-            <Chip
-              icon={<Calendar />}
-              label={formatDate(post.publishedAt)}
-              variant="outlined"
-              sx={{ mr: 1, mb: 1 }}
-            />
-            <Chip
-              icon={<Person />}
-              label={post.author}
-              color="primary"
-            />
-          </Box>
+        <div className="p-6 md:p-10">
+          <div className="flex flex-wrap gap-2 mb-6">
+            <Badge variant="outline" className="flex items-center gap-1">
+              <Calendar className="w-3 h-3" />
+              {formatDate(post.publishedAt)}
+            </Badge>
+            <Badge className="flex items-center gap-1 bg-blue-600">
+              <User className="w-3 h-3" />
+              {post.author}
+            </Badge>
+          </div>
 
-          <Typography
-            variant="h3"
-            component="h1"
-            gutterBottom
-            sx={{
-              fontWeight: 'bold',
-              lineHeight: 1.2,
-              mb: 3,
-              fontSize: { xs: '2rem', md: '3rem' },
-              color: '#1e293b',
-            }}
-          >
+          <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
             {post.title}
-          </Typography>
+          </h1>
 
-          <Typography
-            variant="h6"
-            color="text.secondary"
-            sx={{ 
-              mb: 4, 
-              fontStyle: 'italic',
-              borderLeft: '4px solid #f97316',
-              pl: 2,
-              py: 1,
-            }}
-          >
-            {post.excerpt}
-          </Typography>
+          <div className="border-l-4 border-orange-500 pl-6 py-4 mb-8 bg-orange-50">
+            <p className="text-lg text-gray-700 italic">
+              {post.excerpt}
+            </p>
+          </div>
 
-          <Typography
-            variant="body1"
-            sx={{
-              lineHeight: 1.8,
-              fontSize: '1.1rem',
-              color: '#374151',
-              '& p': { mb: 2 },
-            }}
-          >
+          <div className="prose prose-lg max-w-none">
             {post.content.split('\n').map((paragraph, index) => (
-              <Box component="p" key={index} mb={2}>
+              <p key={index} className="mb-4 text-gray-700 leading-relaxed">
                 {paragraph}
-              </Box>
+              </p>
             ))}
-          </Typography>
+          </div>
 
-          <Box 
-            mt={5} 
-            pt={3} 
-            borderTop="1px solid #e5e7eb"
-            display="flex" 
-            justifyContent="center"
-          >
+          <div className="mt-10 pt-6 border-t border-gray-200 text-center">
             <Button
-              variant="contained"
-              size="large"
               onClick={() => navigate('/posts')}
-              sx={{
-                bgcolor: '#f97316',
-                '&:hover': { bgcolor: '#ea580c' },
-                px: 4,
-                py: 1.5,
-              }}
+              className="bg-orange-500 hover:bg-orange-600 px-8 py-3"
             >
               Ver Mais Artigos
             </Button>
-          </Box>
-        </Box>
-      </Paper>
-    </Container>
+          </div>
+        </div>
+      </article>
+    </div>
   );
 };
 

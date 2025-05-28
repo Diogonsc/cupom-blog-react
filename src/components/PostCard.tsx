@@ -1,14 +1,8 @@
 
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Button,
-  Box,
-  Chip,
-} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Button } from './ui/button';
+import { Card, CardContent } from './ui/card';
+import { Badge } from './ui/badge';
 
 interface Post {
   id: number;
@@ -36,81 +30,36 @@ const PostCard = ({ post }: PostCardProps) => {
   };
 
   return (
-    <Card 
-      sx={{ 
-        height: '100%', 
-        display: 'flex', 
-        flexDirection: 'column',
-        transition: 'transform 0.2s, box-shadow 0.2s',
-        '&:hover': {
-          transform: 'translateY(-4px)',
-          boxShadow: 4,
-        }
-      }}
-    >
-      <CardMedia
-        component="img"
-        height="200"
-        image={post.image}
-        alt={post.title}
-        sx={{ objectFit: 'cover' }}
-      />
-      <CardContent sx={{ flexGrow: 1, p: 3 }}>
-        <Box mb={2}>
-          <Chip 
-            label={formatDate(post.publishedAt)} 
-            size="small" 
-            variant="outlined"
-            sx={{ mb: 1 }}
-          />
-          <Chip 
-            label={post.author} 
-            size="small" 
-            color="primary"
-            sx={{ ml: 1 }}
-          />
-        </Box>
+    <Card className="h-full flex flex-col transition-all duration-200 hover:shadow-lg hover:-translate-y-1">
+      <div className="relative">
+        <img
+          src={post.image}
+          alt={post.title}
+          className="w-full h-48 object-cover rounded-t-lg"
+        />
+      </div>
+      
+      <CardContent className="flex-1 flex flex-col p-6">
+        <div className="flex flex-wrap gap-2 mb-4">
+          <Badge variant="outline" className="text-xs">
+            {formatDate(post.publishedAt)}
+          </Badge>
+          <Badge className="text-xs bg-blue-600">
+            {post.author}
+          </Badge>
+        </div>
         
-        <Typography 
-          gutterBottom 
-          variant="h6" 
-          component="h2" 
-          sx={{ 
-            fontWeight: 'bold',
-            lineHeight: 1.3,
-            mb: 2,
-            display: '-webkit-box',
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-          }}
-        >
+        <h2 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 leading-tight">
           {post.title}
-        </Typography>
+        </h2>
         
-        <Typography 
-          variant="body2" 
-          color="text.secondary" 
-          sx={{ 
-            mb: 3,
-            display: '-webkit-box',
-            WebkitLineClamp: 3,
-            WebkitBoxOrient: 'vertical',
-            overflow: 'hidden',
-          }}
-        >
+        <p className="text-gray-600 mb-6 flex-1 line-clamp-3">
           {post.excerpt}
-        </Typography>
+        </p>
         
         <Button 
-          variant="contained" 
           onClick={() => navigate(`/posts/${post.id}`)}
-          sx={{ 
-            bgcolor: '#f97316',
-            '&:hover': { bgcolor: '#ea580c' },
-            borderRadius: 2,
-            px: 3
-          }}
+          className="bg-orange-500 hover:bg-orange-600 w-full"
         >
           Leia mais
         </Button>

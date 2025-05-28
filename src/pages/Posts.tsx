@@ -1,15 +1,8 @@
 
 import { useState, useEffect } from 'react';
-import {
-  Container,
-  Typography,
-  Grid,
-  Box,
-  CircularProgress,
-  Alert,
-} from '@mui/material';
 import PostCard from '../components/PostCard';
 import { fetchPosts } from '../services/api';
+import { Alert, AlertDescription } from '../components/ui/alert';
 
 interface Post {
   id: number;
@@ -44,58 +37,43 @@ const Posts = () => {
 
   if (loading) {
     return (
-      <Container>
-        <Box display="flex" justifyContent="center" py={8}>
-          <CircularProgress size={60} />
-        </Box>
-      </Container>
+      <div className="container mx-auto px-4">
+        <div className="flex justify-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        </div>
+      </div>
     );
   }
 
   if (error) {
     return (
-      <Container>
-        <Alert severity="error" sx={{ mt: 4 }}>
-          {error}
+      <div className="container mx-auto px-4">
+        <Alert className="mt-8 border-red-200 bg-red-50">
+          <AlertDescription className="text-red-800">
+            {error}
+          </AlertDescription>
         </Alert>
-      </Container>
+      </div>
     );
   }
 
   return (
-    <Container maxWidth="lg">
-      <Box mb={6}>
-        <Typography 
-          variant="h3" 
-          component="h1" 
-          gutterBottom 
-          sx={{ 
-            fontWeight: 'bold',
-            color: '#1e293b',
-            textAlign: 'center',
-            mb: 2
-          }}
-        >
+    <div className="container mx-auto px-4 max-w-7xl">
+      <div className="mb-12 text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Últimos Artigos
-        </Typography>
-        <Typography 
-          variant="h6" 
-          color="text.secondary" 
-          align="center"
-          sx={{ maxWidth: '600px', mx: 'auto' }}
-        >
+        </h1>
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
           Descubra as melhores dicas para economizar e aproveitar as melhores ofertas online
-        </Typography>
-      </Box>
+        </p>
+      </div>
 
-      <Grid container spacing={4}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post) => (
-          <Grid item xs={12} sm={6} md={4} key={post.id}>
-            <PostCard post={post} />
-          </Grid>
+          <PostCard key={post.id} post={post} />
         ))}
-      </Grid>
-    </Container>
+      </div>
+    </div>
   );
 };
 

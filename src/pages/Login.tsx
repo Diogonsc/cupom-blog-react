@@ -1,18 +1,13 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Container,
-  Paper,
-  TextField,
-  Button,
-  Typography,
-  Box,
-  Alert,
-  CircularProgress,
-} from '@mui/material';
-import { loginUser } from '../services/api';
 import { useAuth } from '../hooks/useAuth';
+import { loginUser } from '../services/api';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Card, CardContent, CardHeader } from '../components/ui/card';
+import { Alert, AlertDescription } from '../components/ui/alert';
 
 const Login = () => {
   const [email, setEmail] = useState('eve.holt@reqres.in');
@@ -39,83 +34,80 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        minHeight="100vh"
-      >
-        <Paper elevation={3} sx={{ p: 4, width: '100%', borderRadius: 2 }}>
-          <Box textAlign="center" mb={3}>
-            <img 
-              src="https://cdn.meucupom.com/app-assets/5.07.46/novomc/assets/images/logo.png" 
-              alt="Meu Cupom" 
-              style={{ height: '60px', marginBottom: '16px' }}
-            />
-            <Typography variant="h4" component="h1" gutterBottom color="primary">
-              Blog Meu Cupom
-            </Typography>
-            <Typography variant="body1" color="text.secondary">
-              Faça login para acessar os melhores conteúdos sobre economia
-            </Typography>
-          </Box>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-md w-full space-y-8">
+        <div className="text-center">
+          <img 
+            src="https://cdn.meucupom.com/app-assets/5.07.46/novomc/assets/images/logo.png" 
+            alt="Meu Cupom" 
+            className="mx-auto h-16 mb-4"
+          />
+          <h2 className="text-3xl font-bold text-blue-600 mb-2">
+            Blog Meu Cupom
+          </h2>
+          <p className="text-gray-600">
+            Faça login para acessar os melhores conteúdos sobre economia
+          </p>
+        </div>
 
-          {error && (
-            <Alert severity="error" sx={{ mb: 2 }}>
-              {error}
-            </Alert>
-          )}
+        <Card className="mt-8">
+          <CardHeader></CardHeader>
+          <CardContent>
+            {error && (
+              <Alert className="mb-4 border-red-200 bg-red-50">
+                <AlertDescription className="text-red-800">
+                  {error}
+                </AlertDescription>
+              </Alert>
+            )}
 
-          <form onSubmit={handleSubmit}>
-            <TextField
-              fullWidth
-              label="Email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              margin="normal"
-              required
-              disabled={loading}
-            />
-            <TextField
-              fullWidth
-              label="Senha"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              margin="normal"
-              required
-              disabled={loading}
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              size="large"
-              disabled={loading}
-              sx={{ 
-                mt: 3, 
-                py: 1.5,
-                bgcolor: '#f97316',
-                '&:hover': { bgcolor: '#ea580c' }
-              }}
-            >
-              {loading ? <CircularProgress size={24} color="inherit" /> : 'Entrar'}
-            </Button>
-          </form>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={loading}
+                  className="mt-1"
+                />
+              </div>
+              
+              <div>
+                <Label htmlFor="password">Senha</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  disabled={loading}
+                  className="mt-1"
+                />
+              </div>
 
-          <Box mt={3} p={2} bgcolor="#f8fafc" borderRadius={1}>
-            <Typography variant="body2" color="text.secondary" align="center">
-              <strong>Credenciais de teste:</strong><br />
-              Email: eve.holt@reqres.in<br />
-              Senha: cityslicka
-            </Typography>
-          </Box>
-        </Paper>
-      </Box>
-    </Container>
+              <Button
+                type="submit"
+                className="w-full bg-orange-500 hover:bg-orange-600"
+                disabled={loading}
+              >
+                {loading ? 'Entrando...' : 'Entrar'}
+              </Button>
+            </form>
+
+            <div className="mt-6 p-4 bg-gray-100 rounded-lg">
+              <p className="text-sm text-gray-600 text-center">
+                <strong>Credenciais de teste:</strong><br />
+                Email: eve.holt@reqres.in<br />
+                Senha: cityslicka
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
   );
 };
 

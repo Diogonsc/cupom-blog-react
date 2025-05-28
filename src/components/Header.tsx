@@ -1,7 +1,7 @@
 
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import { Button } from './ui/button';
 
 const Header = () => {
   const { logout, isAuthenticated } = useAuth();
@@ -15,23 +15,29 @@ const Header = () => {
   if (!isAuthenticated) return null;
 
   return (
-    <AppBar position="static" sx={{ bgcolor: '#2563eb', mb: 4 }}>
-      <Toolbar>
-        <Box display="flex" alignItems="center" flexGrow={1}>
-          <img 
-            src="https://cdn.meucupom.com/app-assets/5.07.46/novomc/assets/images/logo.png" 
-            alt="Meu Cupom" 
-            style={{ height: '40px', marginRight: '16px' }}
-          />
-          <Typography variant="h6" component="div">
-            Blog Meu Cupom
-          </Typography>
-        </Box>
-        <Button color="inherit" onClick={handleLogout}>
-          Sair
-        </Button>
-      </Toolbar>
-    </AppBar>
+    <header className="bg-blue-600 shadow-lg mb-8">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center space-x-4">
+            <img 
+              src="https://cdn.meucupom.com/app-assets/5.07.46/novomc/assets/images/logo.png" 
+              alt="Meu Cupom" 
+              className="h-10"
+            />
+            <h1 className="text-white text-xl font-semibold">
+              Blog Meu Cupom
+            </h1>
+          </div>
+          <Button 
+            variant="outline" 
+            onClick={handleLogout}
+            className="text-white border-white hover:bg-white hover:text-blue-600"
+          >
+            Sair
+          </Button>
+        </div>
+      </div>
+    </header>
   );
 };
 

@@ -1,6 +1,4 @@
 
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { CssBaseline } from '@mui/material';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './hooks/useAuth';
@@ -10,29 +8,14 @@ import Login from './pages/Login';
 import Posts from './pages/Posts';
 import PostDetail from './pages/PostDetail';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#2563eb',
-    },
-    secondary: {
-      main: '#f97316',
-    },
-  },
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-  },
-});
-
 const queryClient = new QueryClient();
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <AuthProvider>
-          <BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <div className="min-h-screen bg-gray-50">
             <Header />
             <Routes>
               <Route path="/login" element={<Login />} />
@@ -55,9 +38,9 @@ const App = () => {
               <Route path="/" element={<Navigate to="/posts" replace />} />
               <Route path="*" element={<Navigate to="/posts" replace />} />
             </Routes>
-          </BrowserRouter>
-        </AuthProvider>
-      </ThemeProvider>
+          </div>
+        </BrowserRouter>
+      </AuthProvider>
     </QueryClientProvider>
   );
 };
