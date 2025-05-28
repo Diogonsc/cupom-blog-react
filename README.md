@@ -1,73 +1,152 @@
-# Welcome to your Lovable project
 
-## Project info
+# Blog Meu Cupom
 
-**URL**: https://lovable.dev/projects/e6a11522-ca61-4938-970b-1c480787e131
+Uma aplicação de blog desenvolvida em React com TypeScript, integrada com Material UI e seguindo as melhores práticas de desenvolvimento front-end.
 
-## How can I edit this code?
+## 🚀 Tecnologias Utilizadas
 
-There are several ways of editing your application.
+- **React 18** com TypeScript
+- **Material UI** para componentes e design system
+- **React Router DOM** para navegação
+- **Axios** para requisições HTTP
+- **React Query** para gerenciamento de estado e cache
+- **Vite** como build tool
 
-**Use Lovable**
+## 📋 Funcionalidades
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/e6a11522-ca61-4938-970b-1c480787e131) and start prompting.
+### 🔐 Autenticação
+- Tela de login integrada com API ReqRes
+- Armazenamento seguro do token no localStorage
+- Proteção de rotas autenticadas
+- Tratamento de erros de autenticação
 
-Changes made via Lovable will be committed automatically to this repo.
+### 📰 Gestão de Posts
+- Listagem de posts com cards responsivos
+- Página de detalhes com conteúdo completo
+- Layout adaptativo para mobile e desktop
+- Navegação intuitiva entre páginas
 
-**Use your preferred IDE**
+### 🎨 Design e UX
+- Interface moderna seguindo a identidade visual do Meu Cupom
+- Componentes Material UI customizados
+- Responsividade total
+- Animações e transições suaves
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🛠️ Instalação e Execução
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Pré-requisitos
+- Node.js (versão 16 ou superior)
+- npm ou yarn
 
-Follow these steps:
+### Passos para executar localmente
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. **Clone o repositório**
+```bash
+git clone <url-do-repositorio>
+cd blog-meu-cupom
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. **Instale as dependências**
+```bash
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. **Execute a aplicação em modo de desenvolvimento**
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. **Acesse a aplicação**
+```
+http://localhost:8080
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Credenciais para teste
+- **Email:** eve.holt@reqres.in
+- **Senha:** cityslicka
 
-**Use GitHub Codespaces**
+## 📁 Estrutura do Projeto
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```
+src/
+├── components/          # Componentes reutilizáveis
+│   ├── Header.tsx
+│   ├── PostCard.tsx
+│   └── ProtectedRoute.tsx
+├── hooks/              # Custom hooks
+│   └── useAuth.tsx
+├── pages/              # Páginas da aplicação
+│   ├── Login.tsx
+│   ├── Posts.tsx
+│   └── PostDetail.tsx
+├── services/           # Serviços e APIs
+│   └── api.ts
+├── App.tsx             # Componente principal
+└── main.tsx           # Entry point
 
-## What technologies are used for this project?
+public/
+└── posts.json         # Dados simulados dos posts
+```
 
-This project is built with:
+## 🔧 Scripts Disponíveis
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- `npm run dev` - Executa a aplicação em modo de desenvolvimento
+- `npm run build` - Gera build de produção
+- `npm run preview` - Visualiza o build de produção localmente
+- `npm run lint` - Executa verificação de código com ESLint
 
-## How can I deploy this project?
+## 📱 Responsividade
 
-Simply open [Lovable](https://lovable.dev/projects/e6a11522-ca61-4938-970b-1c480787e131) and click on Share -> Publish.
+A aplicação foi desenvolvida com design responsivo, garantindo uma experiência otimizada em:
+- Desktop (1200px+)
+- Tablet (768px - 1199px)
+- Mobile (até 767px)
 
-## Can I connect a custom domain to my Lovable project?
+## 🎯 Funcionalidades Implementadas
 
-Yes, you can!
+### ✅ Requisitos Obrigatórios Atendidos
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- [x] Tela de login com integração ReqRes API
+- [x] Armazenamento de token no localStorage
+- [x] Redirecionamento após login bem-sucedido
+- [x] Tratamento de erros de autenticação
+- [x] Listagem de posts com Material UI
+- [x] Cards com título, resumo, imagem e botão "Leia mais"
+- [x] Página de detalhes com rota dinâmica
+- [x] Layout responsivo para mobile e desktop
+- [x] Organização de código em componentes
+- [x] Uso adequado de hooks React
+- [x] Requisições HTTP com Axios
+- [x] Header obrigatório x-api-key nas requisições
+- [x] Estrutura de pastas organizada
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### 🎨 Melhorias Implementadas
+
+- Sistema de autenticação com Context API
+- Proteção de rotas
+- Loading states e tratamento de erros
+- Design system baseado no Material UI
+- Animações e transições suaves
+- Otimização para SEO
+- Código TypeScript tipado
+
+## 🚀 Deploy
+
+Para fazer deploy da aplicação:
+
+1. **Gere o build de produção**
+```bash
+npm run build
+```
+
+2. **O build será gerado na pasta `dist/`**
+
+3. **Faça upload dos arquivos para seu provedor de hospedagem**
+
+## 📞 Suporte
+
+Para dúvidas ou sugestões sobre este projeto, entre em contato através dos canais oficiais do Meu Cupom.
+
+---
+
+Desenvolvido com ❤️ para o desafio técnico Meu Cupom

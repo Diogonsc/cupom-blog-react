@@ -1,0 +1,30 @@
+
+[
+  {
+    "id": 1,
+    "title": "5 formas de economizar comprando online",
+    "excerpt": "Descubra estratégias práticas para poupar nas suas compras digitais.",
+    "content": "Neste artigo, você aprenderá como comparar preços, usar cupons, cashback, alertas de promoção e muito mais. Fazer compras online pode ser uma excelente forma de economizar, mas é preciso conhecer as estratégias certas. Primeiro, sempre compare preços em diferentes sites antes de finalizar a compra. Use extensões do navegador que fazem isso automaticamente. Segundo, procure por cupons de desconto em sites especializados. Terceiro, considere programas de cashback que devolvem parte do dinheiro gasto. Quarto, cadastre-se em alertas de preço para ser notificado quando o produto baixar de valor. Por fim, aproveite datas promocionais como Black Friday, mas sempre com planejamento.",
+    "author": "Equipe Meu Cupom",
+    "publishedAt": "2024-09-12",
+    "image": "https://picsum.photos/id/1011/400/200"
+  },
+  {
+    "id": 2,
+    "title": "O que é cashback e como aproveitar melhor",
+    "excerpt": "Cashback pode parecer complicado, mas é simples e vantajoso. Veja como funciona!",
+    "content": "O cashback é uma forma de recuperar parte do dinheiro gasto. Neste artigo, mostramos como escolher plataformas confiáveis e acumular mais retorno. O sistema funciona de forma simples: você faz uma compra através de um link ou aplicativo parceiro e recebe de volta uma porcentagem do valor gasto. Para maximizar seus ganhos, cadastre-se em múltiplas plataformas de cashback, compare as porcentagens oferecidas e sempre verifique se há promoções especiais. Lembre-se de ler os termos e condições, pois alguns produtos podem estar excluídos. O segredo é fazer do cashback um hábito: antes de qualquer compra online, verifique se há cashback disponível.",
+    "author": "Bruna Silva",
+    "publishedAt": "2024-10-01",
+    "image": "https://picsum.photos/id/1015/400/200"
+  },
+  {
+    "id": 3,
+    "title": "As melhores extensões para economizar no navegador",
+    "excerpt": "Extensões podem fazer muito por seu bolso. Veja nossas favoritas!",
+    "content": "Listamos as melhores ferramentas para encontrar cupons automaticamente, comparar preços e alertar sobre promoções enquanto você navega. As extensões de navegador são aliadas poderosas para quem quer economizar. Honey, por exemplo, testa automaticamente todos os cupons disponíveis no checkout. O InvisibleHand compara preços em tempo real enquanto você navega. O Capital One Shopping mostra ofertas similares de outros sites. Rakuten oferece cashback em milhares de lojas. Para usuários brasileiros, recomendamos também o Zoom, que compara preços nacionalmente. Instale essas extensões e configure notificações para nunca mais perder uma promoção. Lembre-se de manter as extensões atualizadas para melhor funcionamento.",
+    "author": "Lucas Martins",
+    "publishedAt": "2024-11-20",
+    "image": "https://picsum.photos/id/1016/400/200"
+  }
+]
