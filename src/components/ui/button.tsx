@@ -1,56 +1,130 @@
-import * as React from "react"
-import { Slot } from "@radix-ui/react-slot"
-import { cva, type VariantProps } from "class-variance-authority"
+import * as React from "react";
+import {
+  Button as MuiButton,
+  ButtonProps as MuiButtonProps,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
 
-import { cn } from "@/lib/utils"
+type CustomSize = "default" | "sm" | "lg" | "icon";
+type CustomVariant =
+  | "default"
+  | "destructive"
+  | "outline"
+  | "secondary"
+  | "ghost"
+  | "link"
+  | "orange";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
-  {
-    variants: {
-      variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
-      },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  }
-)
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean
+export interface ButtonProps extends Omit<MuiButtonProps, "variant" | "size"> {
+  variant?: CustomVariant;
+  size?: CustomSize;
 }
 
+const StyledButton = styled(MuiButton, {
+  shouldForwardProp: (prop) =>
+    prop !== "customVariant" && prop !== "customSize",
+})<{ customVariant?: CustomVariant; customSize?: CustomSize }>(
+  ({ theme, customVariant = "default", customSize = "default" }) => ({
+    gap: "0.5rem",
+    "& .MuiSvgIcon-root": {
+      fontSize: "1rem",
+    },
+    ...(customVariant === "default" && {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText,
+      "&:hover": {
+        backgroundColor: theme.palette.primary.dark,
+      },
+    }),
+    ...(customVariant === "destructive" && {
+      backgroundColor: theme.palette.error.main,
+      color: theme.palette.error.contrastText,
+      "&:hover": {
+        backgroundColor: theme.palette.error.dark,
+      },
+    }),
+    ...(customVariant === "outline" && {
+      border: `1px solid ${theme.palette.divider}`,
+      backgroundColor: "transparent",
+      "&:hover": {
+        backgroundColor: theme.palette.action.hover,
+      },
+    }),
+    ...(customVariant === "secondary" && {
+      backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.secondary.contrastText,
+      "&:hover": {
+        backgroundColor: theme.palette.secondary.dark,
+      },
+    }),
+    ...(customVariant === "ghost" && {
+      backgroundColor: "transparent",
+      "&:hover": {
+        backgroundColor: theme.palette.action.hover,
+      },
+    }),
+    ...(customVariant === "link" && {
+      backgroundColor: "transparent",
+      color: theme.palette.primary.main,
+      textDecoration: "underline",
+      "&:hover": {
+        backgroundColor: "transparent",
+        textDecoration: "none",
+      },
+    }),
+    ...(customVariant === "orange" && {
+      backgroundColor: "#fb923c", // orange-400
+      color: "white",
+      "&:hover": {
+        backgroundColor: "#f97316", // orange-500
+      },
+    }),
+    ...(customSize === "default" && {
+      height: "2.5rem",
+      padding: "0.5rem 1rem",
+    }),
+    ...(customSize === "sm" && {
+      height: "2.25rem",
+      padding: "0.25rem 0.75rem",
+      fontSize: "0.875rem",
+    }),
+    ...(customSize === "lg" && {
+      height: "2.75rem",
+      padding: "0.5rem 2rem",
+    }),
+    ...(customSize === "icon" && {
+      height: "2.5rem",
+      width: "2.5rem",
+      padding: 0,
+    }),
+  })
+);
+
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button"
+  ({ variant = "default", size = "default", ...props }, ref) => {
+    const muiVariant =
+      variant === "default" ||
+      variant === "destructive" ||
+      variant === "secondary" ||
+      variant === "orange"
+        ? "contained"
+        : "text";
+    const muiSize =
+      size === "default" ? "medium" : size === "sm" ? "small" : "large";
+
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+      <StyledButton
         ref={ref}
+        variant={muiVariant}
+        size={muiSize}
+        customVariant={variant}
+        customSize={size}
         {...props}
       />
-    )
+    );
   }
-)
-Button.displayName = "Button"
+);
 
-export { Button, buttonVariants }
+Button.displayName = "Button";
+
+export { Button };

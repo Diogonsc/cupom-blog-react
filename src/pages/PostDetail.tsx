@@ -1,11 +1,10 @@
-
-import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { fetchPosts } from '../services/api';
-import { Button } from '../components/ui/button';
-import { Badge } from '../components/ui/badge';
-import { Alert, AlertDescription } from '../components/ui/alert';
-import { ArrowLeft, User, Calendar } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { fetchPosts } from "../services/api";
+import { Button } from "../components/ui/button";
+import { Badge } from "../components/ui/badge";
+import { Alert, AlertDescription } from "../components/ui/alert";
+import { ArrowLeft, User, Calendar } from "lucide-react";
 
 interface Post {
   id: number;
@@ -22,7 +21,7 @@ const PostDetail = () => {
   const navigate = useNavigate();
   const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const loadPost = async () => {
@@ -32,11 +31,11 @@ const PostDetail = () => {
         if (foundPost) {
           setPost(foundPost);
         } else {
-          setError('Post não encontrado.');
+          setError("Post não encontrado.");
         }
       } catch (err) {
-        setError('Erro ao carregar o post. Tente novamente.');
-        console.error('Error fetching post:', err);
+        setError("Erro ao carregar o post. Tente novamente.");
+        console.error("Error fetching post:", err);
       } finally {
         setLoading(false);
       }
@@ -46,10 +45,10 @@ const PostDetail = () => {
   }, [id]);
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pt-BR', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric',
+    return new Date(dateString).toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
     });
   };
 
@@ -68,13 +67,13 @@ const PostDetail = () => {
       <div className="container mx-auto px-4">
         <Alert className="mt-8 border-red-200 bg-red-50">
           <AlertDescription className="text-red-800">
-            {error || 'Post não encontrado'}
+            {error || "Post não encontrado"}
           </AlertDescription>
         </Alert>
         <div className="mt-4">
           <Button
             variant="outline"
-            onClick={() => navigate('/posts')}
+            onClick={() => navigate("/posts")}
             className="flex items-center gap-2"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -90,7 +89,7 @@ const PostDetail = () => {
       <div className="mb-6">
         <Button
           variant="outline"
-          onClick={() => navigate('/posts')}
+          onClick={() => navigate("/posts")}
           className="flex items-center gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -104,7 +103,7 @@ const PostDetail = () => {
           alt={post.title}
           className="w-full h-64 md:h-96 object-cover"
         />
-        
+
         <div className="p-6 md:p-10">
           <div className="flex flex-wrap gap-2 mb-6">
             <Badge variant="outline" className="flex items-center gap-1">
@@ -122,13 +121,11 @@ const PostDetail = () => {
           </h1>
 
           <div className="border-l-4 border-orange-500 pl-6 py-4 mb-8 bg-orange-50">
-            <p className="text-lg text-gray-700 italic">
-              {post.excerpt}
-            </p>
+            <p className="text-lg text-gray-700 italic">{post.excerpt}</p>
           </div>
 
           <div className="prose prose-lg max-w-none">
-            {post.content.split('\n').map((paragraph, index) => (
+            {post.content.split("\n").map((paragraph, index) => (
               <p key={index} className="mb-4 text-gray-700 leading-relaxed">
                 {paragraph}
               </p>
@@ -137,8 +134,9 @@ const PostDetail = () => {
 
           <div className="mt-10 pt-6 border-t border-gray-200 text-center">
             <Button
-              onClick={() => navigate('/posts')}
-              className="bg-orange-500 hover:bg-orange-600 px-8 py-3"
+              onClick={() => navigate("/posts")}
+              variant="orange"
+              className="px-8 py-3"
             >
               Ver Mais Artigos
             </Button>
