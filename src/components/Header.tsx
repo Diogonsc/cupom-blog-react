@@ -1,7 +1,6 @@
-
-import { useAuth } from '../hooks/useAuth';
-import { useNavigate } from 'react-router-dom';
-import { Button } from './ui/button';
+import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
+import { Button } from "./ui/button";
 
 const Header = () => {
   const { logout, isAuthenticated } = useAuth();
@@ -9,7 +8,7 @@ const Header = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate("/login");
   };
 
   if (!isAuthenticated) return null;
@@ -19,17 +18,15 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-4">
-            <img 
-              src="https://cdn.meucupom.com/app-assets/5.07.46/novomc/assets/images/logo.png" 
-              alt="Meu Cupom" 
+            <img
+              src="https://cdn.meucupom.com/app-assets/5.07.46/novomc/assets/images/logo.png"
+              alt="Meu Cupom"
               className="h-10"
             />
-            <h1 className="text-white text-xl font-semibold">
-              Blog Meu Cupom
-            </h1>
+            <h1 className="text-white text-xl font-semibold">Blog</h1>
           </div>
-          <Button 
-            variant="outline" 
+          <Button
+            variant="outline"
             onClick={handleLogout}
             className="text-white border-white hover:bg-white hover:text-blue-600"
           >
